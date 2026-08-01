@@ -1,0 +1,167 @@
+%==============================================================
+%  Félix Jesús Nilo Bustios — Resume (Harvard format)
+%  Compile with: pdflatex Felix_Nilo_Bustios_CV.tex
+%  (or paste into https://overleaf.com — no extra packages needed)
+%==============================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{1F3A5F}
+
+% --- section headings: small caps, bold, underlined rule -------
+\titleformat{\section}
+  {\normalsize\bfseries\scshape\color{accent}}{}{0em}{}[\vspace{1pt}\hrule height 0.8pt]
+\titlespacing{\section}{0pt}{8pt}{5pt}
+
+% --- list defaults --------------------------------------------
+\setlist[itemize]{leftmargin=1.25em, itemsep=1.5pt, topsep=2pt, parsep=0pt, label=\textbullet}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% --- entry macro: {Organization}{Location}{Title}{Dates} ------
+\newcommand{\entry}[4]{%
+  \textbf{#1}\hfill\textbf{#2}\par
+  \textit{#3}\hfill\textit{#4}\par\vspace{2pt}%
+}
+
+\begin{document}
+
+%================= HEADER =====================================
+\begin{center}
+  {\LARGE\bfseries\color{accent} Félix Jesús Nilo Bustios}\\[4pt]
+  {\small
+    \href{mailto:felixjesusnilob@gmail.com}{felixjesusnilob@gmail.com}\\
+    % TODO: replace with your real profile URLs
+    \href{https://www.linkedin.com/in/felix-nilo}{LinkedIn} \ \textbullet\
+    \href{https://github.com/felixnilo}{GitHub}
+  }
+\end{center}
+
+%================= SUMMARY ====================================
+\section{Summary}
+
+AWS architect and engineering leader with 6+ years building event-driven cloud systems and
+high-performing engineering teams. At OptConnect, I own the migration of carrier integrations
+from a legacy Perl monolith to a modern serverless architecture --- connecting Verizon, Vodafone,
+Webbing and Teal through a multi-stage, event-driven pipeline
+(Lambda $\to$ DynamoDB Streams $\to$ MySQL $\to$ Rails UI) that manages real production traffic
+for thousands of IoT devices.
+
+Delivered measurable impact: \textbf{$-$40\%} production errors, \textbf{$\sim$50\%} reduction in AWS costs,
+\textbf{85\%} OKR attainment, and the professional growth of engineers across \textbf{+9 combined seniority levels}.
+
+Hands-on in Python, Serverless Framework, event-driven architecture, and Ruby on Rails. I operate
+at the intersection of distributed-systems design, team leadership, and business outcomes.
+
+%================= EXPERIENCE ================================
+\section{Experience}
+
+\entry{OptConnect}{Santiago, Chile}{AWS Python Developer}{May 2025 -- Present}
+\begin{itemize}
+  \item Led migration of \textbf{+10 business-critical carrier flows} from a legacy Perl monolith
+        to a serverless, event-driven architecture (Lambda, API Gateway, EventBridge, SQS, SNS,
+        DynamoDB Streams, RDS, VPC/Endpoints), connecting \textbf{Verizon, Vodafone, Webbing and Teal}
+        via REST and SOAP on the Serverless Framework.
+  \item Contributed to a \textbf{$\sim$50\% reduction in the AWS bill} through the serverless migration
+        and cost optimizations such as cached Secrets Manager retrieval (AWS Powertools).
+  \item Re-architected the carrier-callback pipeline as a distributed, idempotent system:
+        Verizon callbacks arrive at API Gateway $\to$ Lambda $\to$ DynamoDB (conditional put, dedup)
+        $\to$ SNS push notifies Lola; a parallel DynamoDB Streams branch flows through a
+        stream-aggregation hub $\to$ MySQL as the durable source of truth --- covering success,
+        failure, and retry paths, with TTL-based retention, validated end-to-end against
+        real production traffic.
+  \item Built Python automations in Odoo (ERP) giving the business visibility into \textbf{$\sim$50,000
+        monthly transactions}, integrating payment data for accounting and contacts.
+  \item Designed an internal AI Slack bot on Amazon Bedrock (Nova Lite) + Lambda/API Gateway/Secrets
+        Manager: input sanitization, kill switch, multi-turn context, structured logging, and a
+        CloudWatch dashboard for query volume, latency and errors.
+  \item Automated infrastructure (CloudFormation + Make), cutting new-developer setup time so the
+        team focuses on value rather than configuration.
+  \item Built CI/CD for serverless systems and external-invocation pipelines; templated the
+        Serverless Framework with GitHub Actions auto-PRs synchronized across repositories.
+  \item Built and maintained Grafana dashboards across environments (CloudWatch data source,
+        Assume Role), boosting operational visibility of carrier-integration systems.
+  \item Owned end-to-end system design: proposed and evaluated architectures (Step Functions,
+        SQS fan-out, VPC Endpoints), produced technical specs, and coordinated delivery across
+        onshore and offshore teams.
+\end{itemize}
+
+\entry{Innovaci\'on y Tecnolog\'ia Aplicada SpA}{La Serena, Chile}{Product and Engineering Consultant}{Sep 2024 -- Present}
+\begin{itemize}
+  \item Ran product discovery (1:1s with key industry clients) and \textbf{digitalized core processes
+        for regional companies}, feeding insights into Figma mockups and product roadmap.
+  \item Conducted \textbf{OSINT security assessments uncovering vulnerabilities across 50 regional
+        companies}.
+  \item Shipped several production web and mobile apps with React Native (Google Play \& App Store), React with Vite and
+        Django 5 REST backend with GitHub Actions CI/CD pipeline.
+  \item Integrated Google/Apple Auth, Google Ads, Google/iOS Payments, MediaPipe SDK, Posthog and Sentry;
+        drove decisions with MS Clarity analytics and A/B testing.
+  \item Dockerized applications and deployed on AWS with load balancing for high availability;
+        managed the development team, backlog and career paths.
+        \item Implemented a \textbf{serverless architecture} with AWS Lambda, API Gateway, S3, DynamoDB, RDS and CloudFormation for scalable and cost-effective solutions with React
+        frontend with Vite for fast and responsive user interfaces using modern web development and design practices.
+        \item Configured Cloudflare and CloudFront for content delivery and security, ensuring fast and secure access to applications.
+      \item Defined specification for digital solutions applied in the \textbf{agriculture, fitness, mining among others} fields, including
+        mobile and web apps for \textbf{Crops Management, Maximize Conversions and Environmental Compliance} with UAV data.
+\end{itemize}
+
+\entry{BUK SpA}{Santiago, Chile}{Engineering Manager}{Feb 2023 -- Sep 2024}
+\begin{itemize}
+  \item Grew the team a combined \textbf{6 seniority levels} through mentoring, continuous feedback
+        and performance reviews.
+  \item Reached \textbf{85\% of team OKRs} and reduced production errors by \textbf{40\%} via a
+        quality-improvement strategy.
+  \item Delivered \textbf{10 high-impact features} for the Performance Management module and the
+        Solutions \& Integrations Marketplace using Ruby on Rails.
+  \item Owned stakeholder reporting on team performance, roadmap prioritization and critical operations.
+\end{itemize}
+
+\entry{Arkho Technology SpA}{Santiago, Chile}{Delivery Manager \& Team Lead}{Feb 2022 -- Feb 2023}
+\begin{itemize}
+  \item Managed \textbf{4 parallel operations teams}, growing seniority \textbf{3 levels}.
+  \item Delivered \textbf{7+ technical-commercial cloud proposals} and ran \textbf{10 onboarding}
+        processes across squads, projects and managed services.
+  \item Applied AWS Step Functions, S3, Fargate, Lightsail, WAF, Route\,53, Lambda, EC2, API Gateway,
+        Glue and QuickSight; led stakeholder planning on quality and productivity metrics.
+\end{itemize}
+
+\entry{ES \'Etico y Sustentable Ltda.}{La Serena, Chile}{Product Owner \& Team Lead}{Jun 2021 -- Feb 2022}
+\begin{itemize}
+  \item Built a marketplace platform on the MERN stack (MongoDB, Express, React, Node) with GCP
+        services (Firebase, Firestore, BigQuery).
+  \item Led client and product discovery, produced Figma mockups, and managed delivery with Jira,
+        Confluence and ProjectLibre.
+\end{itemize}
+
+%================= EDUCATION =================================
+\section{Education}
+\entry{Universidad Cat\'olica del Norte}{Antofagasta, Chile}{M.S. in Computer Science}{2019}
+\vspace{3pt}
+\entry{Universidad Cat\'olica del Norte}{Coquimbo, Chile}{Civil Engineer in Computing \& Informatics}{2018}
+\vspace{3pt}
+\entry{Universidad Cat\'olica del Norte}{Coquimbo, Chile}{B.S. in Engineering Sciences}{2016}
+
+%================= SKILLS ====================================
+\section{Skills \& Certifications}
+\begin{itemize}
+  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Step Functions,
+        VPC/Endpoints, EC2, S3, RDS, Aurora, DynamoDB, CloudFormation, Bedrock, Bedrock Agents, Certificate Manager, Secrets Manager, IoTCore, Powertools,
+        CloudWatch, Glue, QuickSight, WAF, Route\,53, Cloudfront, Service Catalog, Kinesis, Fargate, Firebase,
+        Filestore, BigQuery, Compute Engine, Cloud Run.
+  \item \textbf{Languages \& Frameworks:} Python, Ruby on Rails, JS, Perl, Latex, React Native, Django, Node/Express, SQL, MongoDB, Vite.
+  \item \textbf{Practices \& Tools:} Serverless Framework, GitHub Actions CI/CD, Docker, Grafana, Posthog, MS Clarity,
+        Lean Six Sigma, OKR, Agile (6+ years), Figma, Jira, MS Clarity, Posthog.
+  \item \textbf{Certifications:} AWS Cloud Practitioner; Software Refactoring (Refactoring Guru);
+        Scrum Fundamentals (SCRUMstudy).
+  \item \textbf{Languages:} English (IELTS B2), Spanish (native), Basic Portuguese, Basic Japanese.
+\end{itemize}
+
+\end{document}
