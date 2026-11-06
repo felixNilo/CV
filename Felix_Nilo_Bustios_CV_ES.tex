@@ -1,0 +1,199 @@
+%==============================================================
+%  Félix Jesús Nilo Bustios — Currículum Vitae (formato Harvard)
+%  Compilar con: pdflatex Felix_Nilo_Bustios_CV_ES.tex
+%  (o pegar en https://overleaf.com — no se requieren paquetes extra)
+%==============================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{1F3A5F}
+
+% --- encabezados de sección: versalitas, negrita, línea -------
+\titleformat{\section}
+  {\normalsize\bfseries\scshape\color{accent}}{}{0em}{}[\vspace{1pt}\hrule height 0.8pt]
+\titlespacing{\section}{0pt}{8pt}{5pt}
+
+% --- configuración de listas ----------------------------------
+\setlist[itemize]{leftmargin=1.25em, itemsep=1.5pt, topsep=2pt, parsep=0pt, label=\textbullet}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% --- macro de entrada: {Organización}{Ubicación}{Cargo}{Fechas} ------
+\newcommand{\entry}[4]{%
+  \textbf{#1}\hfill\textbf{#2}\par
+  \textit{#3}\hfill\textit{#4}\par\vspace{2pt}%
+}
+
+\begin{document}
+
+%================= ENCABEZADO =================================
+\begin{center}
+  {\LARGE\bfseries\color{accent} Félix Jesús Nilo Bustios}\\[4pt]
+  {\small
+    \href{mailto:felixjesusnilob@gmail.com}{felixjesusnilob@gmail.com}\\
+    \href{https://www.linkedin.com/in/felix-nilo}{LinkedIn} \ \textbullet\
+    \href{https://github.com/felixnilo}{GitHub}
+  }
+\end{center}
+
+%================= RESUMEN ====================================
+\section{Resumen}
+
+Arquitecto AWS y líder de ingeniería con más de 6 años construyendo sistemas cloud orientados
+a eventos y equipos de ingeniería de alto rendimiento. En OptConnect, lidero la migración de
+integraciones de operadoras desde un monolito Perl legado hacia una arquitectura serverless
+moderna conectando Verizon, Vodafone, Webbing y Teal a través de un pipeline multi-etapa
+orientado a eventos (Lambda $\to$ DynamoDB Streams $\to$ MySQL $\to$ Rails UI) que gestiona
+tráfico real de producción para miles de dispositivos IoT.
+
+Impacto medible: \textbf{$-$40\%} en errores de producción, \textbf{$\sim$50\%} de reducción en
+costos AWS, \textbf{85\%} de cumplimiento de OKRs, y el crecimiento profesional de ingenieros
+en \textbf{+9 niveles de seniority combinados}.
+
+Manos en la masa con Python, Serverless Framework, arquitectura orientada a eventos y Ruby on Rails.
+Opero en la intersección del diseño de sistemas distribuidos, liderazgo de equipos y resultados de negocio.
+
+%================= EXPERIENCIA ================================
+\section{Experiencia}
+
+\entry{OptConnect}{Santiago, Chile}{Desarrollador Python AWS}{Mayo 2025 -- Presente}
+\begin{itemize}
+  \item Lideré la migración de \textbf{+10 flujos críticos de operadoras} desde un monolito Perl
+        legado hacia una arquitectura serverless orientada a eventos (Lambda, API Gateway,
+        EventBridge, SQS, SNS, DynamoDB Streams, RDS, VPC/Endpoints), conectando
+        \textbf{Verizon, Vodafone, Webbing y Teal} vía REST y SOAP en Serverless Framework.
+  \item Contribuí a una \textbf{reducción de $\sim$50\% en la factura AWS} mediante la migración
+        serverless y optimizaciones de costos como la recuperación cacheada de Secrets Manager
+        (AWS Powertools).
+  \item Re-arquitecté el pipeline de callbacks de operadoras como un sistema distribuido e
+        idempotente: los callbacks de Verizon llegan a API Gateway $\to$ Lambda $\to$ DynamoDB
+        (put condicional, dedup) $\to$ SNS notifica a Lola; una rama paralela de DynamoDB Streams
+        fluye por un hub de agregación $\to$ MySQL como fuente de verdad durable --- cubriendo
+        rutas de éxito, fallo y reintento, con retención basada en TTL, validado end-to-end
+        contra tráfico real de producción.
+  \item Construí automatizaciones Python en Odoo (ERP) dando visibilidad al negocio sobre
+        \textbf{$\sim$50.000 transacciones mensuales}, integrando datos de pago para contabilidad
+        y contactos.
+  \item Diseñé un bot interno de IA en Slack sobre Amazon Bedrock (Nova Lite) + Lambda/API
+        Gateway/Secrets Manager: sanitización de entrada, kill switch, contexto multi-turno,
+        logging estructurado y dashboard en CloudWatch para volumen de consultas, latencia y errores.
+  \item Automaticé infraestructura (CloudFormation + Make), reduciendo el tiempo de configuración
+        para nuevos desarrolladores para que el equipo se enfoque en valor y no en configuración.
+  \item Construí CI/CD para sistemas serverless y pipelines de invocación externa; plantillé el
+        Serverless Framework con auto-PRs de GitHub Actions sincronizados entre repositorios.
+  \item Construí y mantuve dashboards de Grafana en múltiples entornos (fuente de datos
+        CloudWatch, Assume Role), mejorando la visibilidad operacional de los sistemas de
+        integración de operadoras.
+  \item Responsable del diseño de sistemas end-to-end: propuse y evalué arquitecturas (Step
+        Functions, SQS fan-out, VPC Endpoints), produje especificaciones técnicas y coordiné
+        la entrega entre equipos onshore y offshore.
+\end{itemize}
+
+\entry{Innovación y Tecnología Aplicada SpA}{La Serena, Chile}{Consultor de Producto e Ingeniería}{Sep 2024 -- Presente}
+\begin{itemize}
+  \item Realicé descubrimiento de producto (1:1 con clientes clave de la industria) y
+        \textbf{digitalicé procesos core de empresas regionales}, volcando los insights en
+        mockups de Figma y roadmap de producto.
+  \item Conduje \textbf{evaluaciones de seguridad OSINT descubriendo vulnerabilidades en 50
+        empresas regionales}.
+  \item Entregué varias apps web y móviles en producción con React Native (Google Play \& App
+        Store), React con Vite y backend Django 5 REST con pipeline CI/CD en GitHub Actions.
+  \item Orquesté entornos de producción, staging y desarrollo en stacks serverless (AWS Lambda,
+        API Gateway, S3, DynamoDB, RDS y CloudFormation) y aplicaciones dockerizadas desplegadas
+        en AWS con balanceo de carga para alta disponibilidad.
+  \item Integré Google/Apple Auth, Google Ads, Pagos Google/iOS, MediaPipe SDK, Posthog y Sentry;
+        tomé decisiones con analytics de MS Clarity y pruebas A/B.
+  \item Gestioné el equipo de desarrollo, proceso de onboarding, backlog y planes de carrera.
+  \item Configuré Cloudflare y CloudFront para entrega de contenido y seguridad, garantizando
+        acceso rápido y seguro a las aplicaciones.
+  \item Definí especificaciones para soluciones digitales aplicadas en \textbf{agricultura,
+        fitness, minería entre otros} sectores, incluyendo apps móviles y web para
+        \textbf{Gestión de Cultivos, Maximización de Conversiones y Cumplimiento Ambiental}
+        con datos UAV.
+  \item Alcancé y desarrollé un \href{https://amissionhub.com}{\textbf{Sistema de Gestión de
+        Cultivos}} con datos UAV, incluyendo monitoreo de salud de cultivos, predicción de
+        rendimiento y técnicas de agricultura de precisión.
+  \item Desarrollé una \href{https://dev.blou.club/}{\textbf{App de Fitness}} con planes de
+        entrenamiento personalizados, seguimiento de progreso y funciones sociales para mejorar
+        el engagement y motivación del usuario.
+  \item Desarrollé una \href{https://chemical2.com/}{\textbf{App de Cumplimiento Ambiental}}
+        para empresas mineras, con monitoreo en tiempo real de parámetros ambientales, reportes
+        y seguimiento de cumplimiento normativo.
+  \item Implementé una \href{https://dev.blou.club/}{\textbf{App de Maximización de
+        Conversiones}} para empresas, con pruebas A/B, analytics y herramientas de optimización
+        para mejorar tasas de conversión e impulsar el crecimiento del negocio.
+\end{itemize}
+
+\entry{Universidad Católica del Norte / Universidad Central}{Coquimbo / La Serena, Chile}{Docente Ingeniería Civil en Computación e Informática}{Jun 2022 -- Dic 2023}
+\begin{itemize}
+  \item Diseñé syllabi y facilité \textbf{5 cursos de pregrado y 1 de postgrado} en dos universidades, abarcando Ingeniería de Software, Proyectos Aplicados y fundamentos de sistemas.
+  \item \textbf{Universidad Católica del Norte}: facilité \textit{Introducción a la Ingeniería}, fomentando la identidad profesional y el pensamiento ingenieril en estudiantes de primer año.
+  \item \textbf{Universidad Central}: facilité \textit{Arquitectura de Software}, \textit{Laboratorio de Complejidad de Algoritmos} y \textit{Fundamentos de Lenguajes de Programación} (pregrado); y \textit{Virtualización} (postgrado) --- articulando teoría con práctica alineada a la industria.
+\end{itemize}
+
+
+\begin{itemize}
+  \item Hice crecer al equipo \textbf{6 niveles de seniority combinados} mediante mentoría,
+        feedback continuo y evaluaciones de desempeño.
+  \item Alcancé el \textbf{85\% de los OKRs del equipo} y reduje los errores de producción en
+        \textbf{40\%} mediante una estrategia de mejora de calidad.
+  \item Entregué \textbf{10 funcionalidades de alto impacto} para el módulo de Gestión del
+        Desempeño y el Marketplace de Soluciones e Integraciones usando Ruby on Rails.
+  \item Responsable del reporte a stakeholders sobre desempeño del equipo, priorización del
+        roadmap y operaciones críticas.
+\end{itemize}
+
+\entry{Arkho Technology SpA}{Santiago, Chile}{Delivery Manager \& Team Lead}{Feb 2022 -- Feb 2023}
+\begin{itemize}
+  \item Gestioné \textbf{4 equipos de operaciones en paralelo}, haciendo crecer el seniority
+        \textbf{3 niveles}.
+  \item Entregué \textbf{7+ propuestas técnico-comerciales cloud} y conduje \textbf{10 procesos
+        de onboarding} en squads, proyectos y servicios gestionados.
+  \item Apliqué AWS Step Functions, S3, Fargate, Lightsail, WAF, Route\,53, Lambda, EC2, API
+        Gateway, Glue y QuickSight; lideré planificación con stakeholders en métricas de calidad
+        y productividad.
+\end{itemize}
+
+\entry{ES Ético y Sustentable Ltda.}{La Serena, Chile}{Product Owner \& Team Lead}{Jun 2021 -- Feb 2022}
+\begin{itemize}
+  \item Construí una plataforma marketplace en el stack MERN (MongoDB, Express, React, Node)
+        con servicios GCP (Firebase, Firestore, BigQuery).
+  \item Lideré el descubrimiento de cliente y producto, produje mockups en Figma y gestioné
+        la entrega con Jira, Confluence y ProjectLibre.
+\end{itemize}
+
+%================= EDUCACIÓN ==================================
+\section{Educación}
+\entry{Universidad Católica del Norte}{Antofagasta, Chile}{Magíster en Ciencias de la Computación}{2019}
+\vspace{3pt}
+\entry{Universidad Católica del Norte}{Coquimbo, Chile}{Ingeniero Civil en Computación e Informática}{2018}
+\vspace{3pt}
+\entry{Universidad Católica del Norte}{Coquimbo, Chile}{Licenciado en Ciencias de la Ingeniería}{2016}
+
+%================= HABILIDADES ================================
+\section{Habilidades y Certificaciones}
+\begin{itemize}
+  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Step Functions,
+        VPC/Endpoints, EC2, S3, RDS, Aurora, DynamoDB, CloudFormation, Bedrock, Bedrock Agents,
+        Certificate Manager, Secrets Manager, IoTCore, Powertools, CloudWatch, Glue, QuickSight,
+        WAF, Route\,53, Cloudfront, Service Catalog, Kinesis, Fargate, Firebase, Filestore,
+        BigQuery, Compute Engine, Cloud Run.
+  \item \textbf{Lenguajes y Frameworks:} Python, Ruby on Rails, JS, Perl, Latex, React Native,
+        Django, Node/Express, TypeScript, SQL, MongoDB, Vite.
+  \item \textbf{Prácticas y Herramientas:} Serverless Framework, GitHub Actions CI/CD, Docker,
+        Grafana, Posthog, MS Clarity, Lean Six Sigma, OKR, Agile (6+ años), Figma, Jira.
+  \item \textbf{Certificaciones:} AWS Cloud Practitioner; Refactorización de Software
+        (Refactoring Guru); Scrum Fundamentals (SCRUMstudy).
+  \item \textbf{Idiomas:} Inglés (IELTS B2), Español (nativo), Portugués básico, Japonés básico.
+\end{itemize}
+
+\end{document}
