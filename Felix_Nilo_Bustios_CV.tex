@@ -78,6 +78,23 @@ at the intersection of distributed-systems design, team leadership, and business
         stream-aggregation hub $\to$ MySQL as the durable source of truth --- covering success,
         failure, and retry paths, with TTL-based retention, validated end-to-end against
         real production traffic.
+  \item Designed and shipped \textbf{NotificationService}, the single entry point for Verizon
+        callbacks ($\sim$\textbf{1,000/hour} in production): API Gateway + Lambda forwarding each raw
+        callback over SigV4-signed HTTPS to its subscribers by callback type (VerizonIntegration, the
+        Rails UI, the data pipeline). Replacing SNS fan-out removed the 256\,KB limit that forced
+        splitting \textbf{96\% of usage callbacks}; all-or-nothing delivery hands retries back to the
+        carrier, with per-callback tracing and alerting.
+  \item Contributed to the company-wide \textbf{GCS data pipeline} (Extract $\to$ Transform $\to$ Load:
+        S3, Kinesis, PostgreSQL), routing carrier callbacks into it and designing
+        \textbf{gcs-commander}, the service that will send device lifecycle commands (suspend, restore,
+        activate, terminate) to carriers and replace the Verizon integration: send-once semantics
+        against duplicate carrier actions, queued asynchronous delivery, and outcomes closed by
+        carrier callbacks or a deadline read. Implemented its contract and the Verizon reference command.
+  \item Ran usage and data-quality analytics in SQL on the production MySQL database across carriers,
+        for billing and operations: traced integrity incidents to their root cause in the pipeline
+        --- a month of usage rewritten $\sim$6\% low on \textbf{$\sim$91k lines} by redelivered callbacks,
+        stale rate plans on \textbf{$\sim$550k devices} --- and audited per-account usage trends and idle
+        active SIMs by customer.
   \item Built Python automations in Odoo (ERP) giving the business visibility into \textbf{$\sim$50,000
         monthly transactions}, integrating payment data for accounting and contacts.
   \item Designed an internal AI Slack bot on Amazon Bedrock (Nova Lite) + Lambda/API Gateway/Secrets
@@ -163,16 +180,19 @@ at the intersection of distributed-systems design, team leadership, and business
 %================= SKILLS ====================================
 \section{Skills \& Certifications}
 \begin{itemize}
-  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Step Functions,
-        VPC/Endpoints, EC2, S3, RDS, Aurora, DynamoDB, CloudFormation, Bedrock, Bedrock Agents, Certificate Manager, Secrets Manager, IoTCore, Powertools,
-        CloudWatch, Glue, QuickSight, WAF, Route\,53, Cloudfront, Service Catalog, Kinesis, Fargate, Firebase,
-        Filestore, BigQuery, Compute Engine, Cloud Run.
-  \item \textbf{Languages \& Frameworks:} Python, Ruby on Rails, JS, Perl, Latex, React Native, Django, Node/Express, TypeScript, SQL, MongoDB, Vite.
-  \item \textbf{Practices \& Tools:} Serverless Framework, GitHub Actions CI/CD, Docker, Grafana, Posthog, MS Clarity,
-        Lean Six Sigma, OKR, Agile (6+ years), Figma, Jira, MS Clarity, Posthog.
+  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Kinesis, Step Functions,
+        DynamoDB, RDS, Aurora, S3, VPC/Endpoints, EC2, Fargate, CloudFormation, Service Catalog,
+        Secrets Manager, Certificate Manager, Powertools, CloudWatch, Bedrock, Bedrock Agents,
+        IoT Core, Glue, QuickSight, WAF, Route\,53, CloudFront; Firebase, BigQuery,
+        Compute Engine, Cloud Run.
+  \item \textbf{Languages \& Frameworks:} Python, Ruby on Rails, Django, JavaScript, TypeScript,
+        Node/Express, React, React Native, Vite, Perl, \LaTeX.
+  \item \textbf{Databases:} MySQL, PostgreSQL, Oracle Database, DynamoDB, MongoDB, Firestore; SQL analytics.
+  \item \textbf{Practices \& Tools:} Serverless Framework, GitHub Actions CI/CD, Docker, Make, pytest,
+        Grafana, PostHog, MS Clarity, Figma, Jira, OKR, Agile (6+ years), Lean Six Sigma.
   \item \textbf{Certifications:} AWS Cloud Practitioner; Software Refactoring (Refactoring Guru);
         Scrum Fundamentals (SCRUMstudy).
-  \item \textbf{Languages:} English (IELTS B2), Spanish (native), Basic Portuguese, Basic Japanese.
+  \item \textbf{Spoken Languages:} English (IELTS B2), Spanish (native), Portuguese (basic), Japanese (basic).
 \end{itemize}
 
 \end{document}

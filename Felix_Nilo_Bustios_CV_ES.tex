@@ -80,6 +80,26 @@ Opero en la intersección del diseño de sistemas distribuidos, liderazgo de equ
         fluye por un hub de agregación $\to$ MySQL como fuente de verdad durable --- cubriendo
         rutas de éxito, fallo y reintento, con retención basada en TTL, validado end-to-end
         contra tráfico real de producción.
+  \item Diseñé y entregué \textbf{NotificationService}, el punto de entrada único para callbacks
+        de Verizon ($\sim$\textbf{1.000/hora} en producción): API Gateway + Lambda reenvía cada
+        callback crudo vía HTTPS firmado con SigV4 a sus suscriptores por tipo de callback
+        (VerizonIntegration, la UI Rails, el pipeline de datos). Reemplazar el fan-out de SNS
+        eliminó el límite de 256\,KB que obligaba a dividir el \textbf{96\%} de los callbacks de
+        uso; la entrega todo-o-nada devuelve los reintentos a la operadora, con trazabilidad y
+        alertas por callback.
+  \item Contribuí al \textbf{pipeline de datos GCS} de la empresa (Extract $\to$ Transform $\to$
+        Load: S3, Kinesis, PostgreSQL), enrutando callbacks de operadoras hacia él y diseñando
+        \textbf{gcs-commander}, el servicio que enviará comandos de ciclo de vida de dispositivos
+        (suspender, restaurar, activar, terminar) a las operadoras y reemplazará la integración
+        Verizon: semántica de envío único contra acciones duplicadas de la operadora, entrega
+        asíncrona en cola, y resultados cerrados por callbacks de la operadora o un deadline.
+        Implementé su contrato y el comando de referencia para Verizon.
+  \item Ejecuté análisis de uso y calidad de datos en SQL sobre la base de datos MySQL de
+        producción entre operadoras, para facturación y operaciones: tracé incidentes de
+        integridad hasta su causa raíz en el pipeline --- un mes de uso reescrito $\sim$6\%
+        por debajo en \textbf{$\sim$91k líneas} por callbacks re-entregados, planes de tarifa
+        desactualizados en \textbf{$\sim$550k dispositivos} --- y audité tendencias de uso por
+        cuenta y SIMs activas ociosas por cliente.
   \item Construí automatizaciones Python en Odoo (ERP) dando visibilidad al negocio sobre
         \textbf{$\sim$50.000 transacciones mensuales}, integrando datos de pago para contabilidad
         y contactos.
@@ -133,7 +153,7 @@ Opero en la intersección del diseño de sistemas distribuidos, liderazgo de equ
         para mejorar tasas de conversión e impulsar el crecimiento del negocio.
 \end{itemize}
 
-\entry{Universidad Católica del Norte / Universidad Central}{Coquimbo / La Serena, Chile}{Docente Ingeniería Civil en Computación e Informática}{Jun 2022 -- Dic 2023}
+\entry{Universidad Católica del Norte / Universidad Central}{Coquimbo / La Serena, Chile}{Docente Ingeniería Civil en Computación e Informática}{Jun 2022 -- Dic 2025}
 \begin{itemize}
   \item Diseñé syllabi y facilité \textbf{5 cursos de pregrado y 1 de postgrado} en dos universidades, abarcando Ingeniería de Software, Proyectos Aplicados y fundamentos de sistemas.
   \item \textbf{Universidad Católica del Norte}: facilité \textit{Introducción a la Ingeniería}, fomentando la identidad profesional y el pensamiento ingenieril en estudiantes de primer año.
@@ -141,6 +161,7 @@ Opero en la intersección del diseño de sistemas distribuidos, liderazgo de equ
 \end{itemize}
 
 
+\entry{BUK SpA}{Santiago, Chile}{Engineering Manager}{Feb 2023 -- Sep 2024}
 \begin{itemize}
   \item Hice crecer al equipo \textbf{6 niveles de seniority combinados} mediante mentoría,
         feedback continuo y evaluaciones de desempeño.
@@ -182,18 +203,19 @@ Opero en la intersección del diseño de sistemas distribuidos, liderazgo de equ
 %================= HABILIDADES ================================
 \section{Habilidades y Certificaciones}
 \begin{itemize}
-  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Step Functions,
-        VPC/Endpoints, EC2, S3, RDS, Aurora, DynamoDB, CloudFormation, Bedrock, Bedrock Agents,
-        Certificate Manager, Secrets Manager, IoTCore, Powertools, CloudWatch, Glue, QuickSight,
-        WAF, Route\,53, Cloudfront, Service Catalog, Kinesis, Fargate, Firebase, Filestore,
-        BigQuery, Compute Engine, Cloud Run.
-  \item \textbf{Lenguajes y Frameworks:} Python, Ruby on Rails, JS, Perl, Latex, React Native,
-        Django, Node/Express, TypeScript, SQL, MongoDB, Vite.
-  \item \textbf{Prácticas y Herramientas:} Serverless Framework, GitHub Actions CI/CD, Docker,
-        Grafana, Posthog, MS Clarity, Lean Six Sigma, OKR, Agile (6+ años), Figma, Jira.
+  \item \textbf{AWS / GCP:} Lambda, API Gateway, EventBridge, SQS, SNS, Kinesis, Step Functions,
+        DynamoDB, RDS, Aurora, S3, VPC/Endpoints, EC2, Fargate, CloudFormation, Service Catalog,
+        Secrets Manager, Certificate Manager, Powertools, CloudWatch, Bedrock, Bedrock Agents,
+        IoT Core, Glue, QuickSight, WAF, Route\,53, CloudFront; Firebase, BigQuery,
+        Compute Engine, Cloud Run.
+  \item \textbf{Lenguajes y Frameworks:} Python, Ruby on Rails, Django, JavaScript, TypeScript,
+        Node/Express, React, React Native, Vite, Perl, \LaTeX.
+  \item \textbf{Bases de Datos:} MySQL, PostgreSQL, Oracle Database, DynamoDB, MongoDB, Firestore; análisis SQL.
+  \item \textbf{Prácticas y Herramientas:} Serverless Framework, GitHub Actions CI/CD, Docker, Make, pytest,
+        Grafana, PostHog, MS Clarity, Figma, Jira, OKR, Agile (6+ años), Lean Six Sigma.
   \item \textbf{Certificaciones:} AWS Cloud Practitioner; Refactorización de Software
         (Refactoring Guru); Scrum Fundamentals (SCRUMstudy).
-  \item \textbf{Idiomas:} Inglés (IELTS B2), Español (nativo), Portugués básico, Japonés básico.
+  \item \textbf{Idiomas:} Inglés (IELTS B2), Español (nativo), Portugués (básico), Japonés (básico).
 \end{itemize}
 
 \end{document}
